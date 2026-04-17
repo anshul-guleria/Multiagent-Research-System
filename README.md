@@ -24,7 +24,7 @@ An AI-powered research assistant that uses multiple specialized agents to search
 | LLM | Groq (llama-3.1-8b-instant) |
 | Orchestration | LangGraph, LangChain |
 | Backend | Flask |
-| Search | DuckDuckGo Search |
+| Search | Tavily Search API |
 | Scraping | BeautifulSoup4 |
 | PDF | fpdf |
 | Frontend | HTML/CSS/JS, marked.js |
@@ -47,7 +47,7 @@ Multiagent-Research-System/
 ├── schema/
 │   └── agent_state.py       # Shared state schema
 ├── tools/
-│   ├── web_search_tool.py   # DuckDuckGo search tool
+│   ├── web_search_tool.py   # Tavily search tool
 │   └── scrape_tool.py       # Web scraping tool
 ├── templates/
 │   └── index.html           # Web UI
@@ -79,9 +79,12 @@ pip install -r requirements.txt
 4. Create a `.env` file in the project root:
 ```env
 GROQ_API_KEY=your_groq_api_key_here
+TAVILY_API_KEY=your_tavily_api_key_here
 ```
 
 Get a free Groq API key at: https://console.groq.com
+
+Get a free Tavily API key at: https://app.tavily.com
 
 ## Usage
 
@@ -108,10 +111,10 @@ Topic Input
     │
     ▼
 Search Agent  ──►  Reader Agent  ──►  Writer Agent  ──►  Critic Agent
-(DuckDuckGo)       (Scrape URL)        (Report)           (Feedback)
+(Tavily API)       (Scrape URL)        (Report)           (Feedback)
 ```
 
-1. **Search**: Queries DuckDuckGo for recent information on the topic
+1. **Search**: Queries Tavily Search API for recent, reliable information on the topic
 2. **Read**: Picks the most relevant URL and scrapes its full content
 3. **Write**: Synthesizes gathered data into a structured report
 4. **Critique**: Scores the report and provides strengths, improvements, and a verdict
@@ -144,6 +147,7 @@ Search Agent  ──►  Reader Agent  ──►  Writer Agent  ──►  Criti
 
 - Python 3.11+
 - Groq API key
+- Tavily API key
 - Internet connection for web search and scraping
 
 ## License
